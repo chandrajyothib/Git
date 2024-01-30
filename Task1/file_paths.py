@@ -6,9 +6,9 @@ directory =input("Input :")
 print("Output :")
 
 for root, dir, files in os.walk(directory):
-    for file in files:
-        #file_path = os.path.join(root,file)
-        print(root,file)
+    for i in files:
+        #file_path = os.path.join(root,i)
+        print(root,i)
 
 
 #--------count word frequency in csv file---
