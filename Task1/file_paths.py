@@ -16,7 +16,6 @@ for root, dir, files in os.walk(directory):
 import pandas as pd
 
 def count_word(file_path):
-    try:
         data = pd.read_csv(file_path)
         s=" "
         s= s.join(data.to_string(index=False).split())
@@ -30,10 +29,6 @@ def count_word(file_path):
         
         return sorted(dict1.items(),key=lambda x:x[1],reverse=True)
     
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
-        return None
-
 csv_file = "/home/chandu/Desktop/sample.csv"
 print("\nWord frequencies in the EXCEL file:",count_word(csv_file))
 
@@ -42,7 +37,6 @@ print("\nWord frequencies in the EXCEL file:",count_word(csv_file))
 import pandas as pd
 
 def count_word(file_path):
-    try:
         data = pd.read_excel(file_path)
         s=" "
         s= s.join(data.to_string(index=False).split())
@@ -54,11 +48,6 @@ def count_word(file_path):
             else:
                 dict1[word]=1
         
-        return sorted(dict1.items(),key=lambda x:x[1],reverse=True)
-    
-    except Exception as e:
-        print(f"Error processing {file_path}: {e}")
-        return None
-
+        return sorted(dict1.items(),key=lambda x:x[1],reverse=True)   
 excel_file = "FINAL450.xlsx"
 print("Word frequency in excel file is as follows :\n"count_word(excel_file))
