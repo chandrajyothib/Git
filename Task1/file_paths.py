@@ -1,53 +1,44 @@
-#--------file paths------
-
 import os
-
-directory =input("Input :")
-print("Output :")
-
-for root, dir, files in os.walk(directory):
-    for i in files:
-        #file_path = os.path.join(root,i)
-        print(root,i)
-
-
-#--------count word frequency in csv file---
-
 import pandas as pd
-
-def count_word(file_path):
-        data = pd.read_csv(file_path)
+   
+#function to count word frequency in xlsx file
+def word_excel(filepath,dict1):
+        data = pd.read_excel(filepath)
         s=" "
         s= s.join(data.to_string(index=False).split())
-        dict1={}
         words=s.lower().split()
         for word in words:
             if word in dict1:
                 dict1[word]+=1
             else:
                 dict1[word]=1
-        
-        return sorted(dict1.items(),key=lambda x:x[1],reverse=True)
-    
-csv_file = "/home/chandu/Desktop/sample.csv"
-print("\nWord frequencies in the EXCEL file:",count_word(csv_file))
+        #word_counts = Counter(text.lower().split())
+        return dict1
 
-#-------count word frequency in excel files----
-
-import pandas as pd
-
-def count_word(file_path):
-        data = pd.read_excel(file_path)
+#function to count word frequency in text file
+def word_csv(filepath,dict1):
+        data = pd.read_csv(filepath)
         s=" "
         s= s.join(data.to_string(index=False).split())
-        dict1={}
+
         words=s.lower().split()
         for word in words:
             if word in dict1:
                 dict1[word]+=1
             else:
                 dict1[word]=1
-        
-        return sorted(dict1.items(),key=lambda x:x[1],reverse=True)   
-excel_file = "FINAL450.xlsx"
-print("Word frequency in excel file is as follows :\n"count_word(excel_file))
+        #word_counts = Counter(text.lower().split())
+        return dict1
+
+d=dict()
+path = input('Enter the Directory path:')
+for root,dirnames,filenames in os.walk(path):
+    for i in filenames:
+        filepath = os.path.join(root,i)
+        print(filepath)
+        if(filepath.endswith('.csv')):
+            word_csv(filepath,d)
+        elif(filepath.endswith('.xlsx')):
+            word_excel(filepath,d)
+          
+print(d)
